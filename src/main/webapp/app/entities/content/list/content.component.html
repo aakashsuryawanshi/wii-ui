@@ -1,0 +1,90 @@
+<div>
+  <h2 id="page-heading" data-cy="ContentHeading">
+    <span>Contents</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-content"
+        [routerLink]="['/content/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Content </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="contents?.length === 0">
+    <span>No contents found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="contents && contents.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Type</span></th>
+          <th scope="col"><span>Text</span></th>
+          <th scope="col"><span>File Path</span></th>
+          <th scope="col"><span>Seq Num</span></th>
+          <th scope="col"><span>Question</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let content of contents; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/content', content.id, 'view']">{{ content.id }}</a>
+          </td>
+          <td>{{ content.type }}</td>
+          <td>{{ content.text }}</td>
+          <td>{{ content.filePath }}</td>
+          <td>{{ content.seqNum }}</td>
+          <td>
+            <div *ngIf="content.question">
+              <a [routerLink]="['/question', content.question?.id, 'view']">{{ content.question?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/content', content.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/content', content.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(content)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
