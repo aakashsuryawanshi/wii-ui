@@ -12,20 +12,21 @@ export type EntityArrayResponseType = HttpResponse<IBranch[]>;
 
 @Injectable({ providedIn: 'root' })
 export class BranchService {
-  public resourceUrl = this.applicationConfigService.getEndpointFor('api/branches');
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/branches');
+  public resourceUrl = this.applicationConfigService.getEndpointFor('branches');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   create(branch: IBranch): Observable<EntityResponseType> {
-    return this.http.post<IBranch>(this.resourceUrl, branch, { observe: 'response' });
+    return this.http.post<IBranch>(this.resourceSecureUrl, branch, { observe: 'response' });
   }
 
   update(branch: IBranch): Observable<EntityResponseType> {
-    return this.http.put<IBranch>(`${this.resourceUrl}/${getBranchIdentifier(branch) as number}`, branch, { observe: 'response' });
+    return this.http.put<IBranch>(`${this.resourceSecureUrl}/${getBranchIdentifier(branch) as number}`, branch, { observe: 'response' });
   }
 
   partialUpdate(branch: IBranch): Observable<EntityResponseType> {
-    return this.http.patch<IBranch>(`${this.resourceUrl}/${getBranchIdentifier(branch) as number}`, branch, { observe: 'response' });
+    return this.http.patch<IBranch>(`${this.resourceSecureUrl}/${getBranchIdentifier(branch) as number}`, branch, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
@@ -38,7 +39,7 @@ export class BranchService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceSecureUrl}/${id}`, { observe: 'response' });
   }
 
   addBranchToCollectionIfMissing(branchCollection: IBranch[], ...branchesToCheck: (IBranch | null | undefined)[]): IBranch[] {

@@ -12,20 +12,25 @@ export type EntityArrayResponseType = HttpResponse<IContent[]>;
 
 @Injectable({ providedIn: 'root' })
 export class ContentService {
-  public resourceUrl = this.applicationConfigService.getEndpointFor('api/contents');
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/contents');
+  public resourceUrl = this.applicationConfigService.getEndpointFor('contents');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   create(content: IContent): Observable<EntityResponseType> {
-    return this.http.post<IContent>(this.resourceUrl, content, { observe: 'response' });
+    return this.http.post<IContent>(this.resourceSecureUrl, content, { observe: 'response' });
   }
 
   update(content: IContent): Observable<EntityResponseType> {
-    return this.http.put<IContent>(`${this.resourceUrl}/${getContentIdentifier(content) as number}`, content, { observe: 'response' });
+    return this.http.put<IContent>(`${this.resourceSecureUrl}/${getContentIdentifier(content) as number}`, content, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(content: IContent): Observable<EntityResponseType> {
-    return this.http.patch<IContent>(`${this.resourceUrl}/${getContentIdentifier(content) as number}`, content, { observe: 'response' });
+    return this.http.patch<IContent>(`${this.resourceSecureUrl}/${getContentIdentifier(content) as number}`, content, {
+      observe: 'response',
+    });
   }
 
   find(id: number): Observable<EntityResponseType> {
@@ -38,7 +43,7 @@ export class ContentService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceSecureUrl}/${id}`, { observe: 'response' });
   }
 
   addContentToCollectionIfMissing(contentCollection: IContent[], ...contentsToCheck: (IContent | null | undefined)[]): IContent[] {

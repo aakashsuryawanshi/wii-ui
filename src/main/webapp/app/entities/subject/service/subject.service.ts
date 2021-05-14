@@ -12,20 +12,25 @@ export type EntityArrayResponseType = HttpResponse<ISubject[]>;
 
 @Injectable({ providedIn: 'root' })
 export class SubjectService {
-  public resourceUrl = this.applicationConfigService.getEndpointFor('api/subjects');
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/subjects');
+  public resourceUrl = this.applicationConfigService.getEndpointFor('subjects');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   create(subject: ISubject): Observable<EntityResponseType> {
-    return this.http.post<ISubject>(this.resourceUrl, subject, { observe: 'response' });
+    return this.http.post<ISubject>(this.resourceSecureUrl, subject, { observe: 'response' });
   }
 
   update(subject: ISubject): Observable<EntityResponseType> {
-    return this.http.put<ISubject>(`${this.resourceUrl}/${getSubjectIdentifier(subject) as number}`, subject, { observe: 'response' });
+    return this.http.put<ISubject>(`${this.resourceSecureUrl}/${getSubjectIdentifier(subject) as number}`, subject, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(subject: ISubject): Observable<EntityResponseType> {
-    return this.http.patch<ISubject>(`${this.resourceUrl}/${getSubjectIdentifier(subject) as number}`, subject, { observe: 'response' });
+    return this.http.patch<ISubject>(`${this.resourceSecureUrl}/${getSubjectIdentifier(subject) as number}`, subject, {
+      observe: 'response',
+    });
   }
 
   find(id: number): Observable<EntityResponseType> {
@@ -38,7 +43,7 @@ export class SubjectService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceSecureUrl}/${id}`, { observe: 'response' });
   }
 
   addSubjectToCollectionIfMissing(subjectCollection: ISubject[], ...subjectsToCheck: (ISubject | null | undefined)[]): ISubject[] {
