@@ -1,0 +1,37 @@
+{
+  "name": "Branch",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "semester",
+      "otherEntityRelationshipName": "branch",
+      "relationshipName": "semester"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "domain",
+      "otherEntityRelationshipName": "branches",
+      "relationshipName": "domain"
+    }
+  ],
+  "entityTableName": "branch",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210510192133"
+}
