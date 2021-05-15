@@ -37,6 +37,10 @@ export class SubjectService {
     return this.http.get<ISubject>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findBySemester(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ISubject[]>(`${this.resourceUrl}/${id}/semester`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<ISubject[]>(this.resourceUrl, { params: options, observe: 'response' });

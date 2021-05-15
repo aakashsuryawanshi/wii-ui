@@ -37,6 +37,10 @@ export class SemesterService {
     return this.http.get<ISemester>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findByBranchId(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ISemester[]>(`${this.resourceUrl}/${id}/branch`, { observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<ISemester[]>(this.resourceUrl, { params: options, observe: 'response' });
