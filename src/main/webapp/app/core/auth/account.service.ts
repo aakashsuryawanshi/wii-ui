@@ -22,7 +22,7 @@ export class AccountService {
   ) {}
 
   save(account: Account): Observable<{}> {
-    return this.http.post(this.applicationConfigService.getEndpointFor('api/account'), account);
+    return this.http.post(this.applicationConfigService.getEndpointFor('api/secure/account'), account);
   }
 
   authenticate(identity: Account | null): void {
@@ -70,7 +70,7 @@ export class AccountService {
   }
 
   private fetch(): Observable<Account> {
-    return this.http.get<Account>(this.applicationConfigService.getEndpointFor('api/account'));
+    return this.http.get<Account>(this.applicationConfigService.getEndpointFor('api/secure/account'));
   }
 
   private navigateToStoredUrl(): void {

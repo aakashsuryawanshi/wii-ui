@@ -12,8 +12,8 @@ export type EntityArrayResponseType = HttpResponse<IContent[]>;
 
 @Injectable({ providedIn: 'root' })
 export class ContentService {
-  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/contents');
-  public resourceUrl = this.applicationConfigService.getEndpointFor('contents');
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/contents');
+  public resourceUrl = this.applicationConfigService.getEndpointFor('api/contents');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 

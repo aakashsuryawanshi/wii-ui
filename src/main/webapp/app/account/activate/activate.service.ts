@@ -9,7 +9,7 @@ export class ActivateService {
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   get(key: string): Observable<{}> {
-    return this.http.get(this.applicationConfigService.getEndpointFor('api/activate'), {
+    return this.http.get(this.applicationConfigService.getEndpointFor('api/secure/activate'), {
       params: new HttpParams().set('key', key),
     });
   }

@@ -12,8 +12,8 @@ export type EntityArrayResponseType = HttpResponse<IBranch[]>;
 
 @Injectable({ providedIn: 'root' })
 export class BranchService {
-  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/branches');
-  public resourceUrl = this.applicationConfigService.getEndpointFor('branches');
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/branches');
+  public resourceUrl = this.applicationConfigService.getEndpointFor('api/branches');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 

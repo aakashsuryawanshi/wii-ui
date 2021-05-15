@@ -12,8 +12,8 @@ export type EntityArrayResponseType = HttpResponse<IDomain[]>;
 
 @Injectable({ providedIn: 'root' })
 export class DomainService {
-  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/domains');
-  public resourceUrl = this.applicationConfigService.getEndpointFor('domains');
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/domains');
+  public resourceUrl = this.applicationConfigService.getEndpointFor('api/domains');
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   create(domain: IDomain): Observable<EntityResponseType> {

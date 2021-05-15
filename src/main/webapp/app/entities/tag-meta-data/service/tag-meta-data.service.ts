@@ -12,8 +12,8 @@ export type EntityArrayResponseType = HttpResponse<ITagMetaData[]>;
 
 @Injectable({ providedIn: 'root' })
 export class TagMetaDataService {
-  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/tag-meta-data');
-  public resourceUrl = this.applicationConfigService.getEndpointFor('tag-meta-data');
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/tag-meta-data');
+  public resourceUrl = this.applicationConfigService.getEndpointFor('api/tag-meta-data');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 

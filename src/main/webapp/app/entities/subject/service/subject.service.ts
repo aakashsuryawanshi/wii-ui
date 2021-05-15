@@ -12,8 +12,8 @@ export type EntityArrayResponseType = HttpResponse<ISubject[]>;
 
 @Injectable({ providedIn: 'root' })
 export class SubjectService {
-  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/subjects');
-  public resourceUrl = this.applicationConfigService.getEndpointFor('subjects');
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/subjects');
+  public resourceUrl = this.applicationConfigService.getEndpointFor('api/subjects');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 

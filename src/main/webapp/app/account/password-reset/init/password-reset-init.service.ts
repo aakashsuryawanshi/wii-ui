@@ -9,6 +9,6 @@ export class PasswordResetInitService {
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   save(mail: string): Observable<{}> {
-    return this.http.post(this.applicationConfigService.getEndpointFor('api/account/reset-password/init'), mail);
+    return this.http.post(this.applicationConfigService.getEndpointFor('api/secure/account/reset-password/init'), mail);
   }
 }
