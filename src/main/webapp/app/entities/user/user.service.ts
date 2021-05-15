@@ -10,7 +10,7 @@ import { IUser, getUserIdentifier } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  public resourceUrl = this.applicationConfigService.getEndpointFor('api/users');
+  public resourceUrl = this.applicationConfigService.getEndpointFor('api/secure/users');
 
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 

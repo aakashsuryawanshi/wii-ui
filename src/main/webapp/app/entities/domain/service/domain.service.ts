@@ -12,20 +12,20 @@ export type EntityArrayResponseType = HttpResponse<IDomain[]>;
 
 @Injectable({ providedIn: 'root' })
 export class DomainService {
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/domains');
   public resourceUrl = this.applicationConfigService.getEndpointFor('api/domains');
-
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   create(domain: IDomain): Observable<EntityResponseType> {
-    return this.http.post<IDomain>(this.resourceUrl, domain, { observe: 'response' });
+    return this.http.post<IDomain>(this.resourceSecureUrl, domain, { observe: 'response' });
   }
 
   update(domain: IDomain): Observable<EntityResponseType> {
-    return this.http.put<IDomain>(`${this.resourceUrl}/${getDomainIdentifier(domain) as number}`, domain, { observe: 'response' });
+    return this.http.put<IDomain>(`${this.resourceSecureUrl}/${getDomainIdentifier(domain) as number}`, domain, { observe: 'response' });
   }
 
   partialUpdate(domain: IDomain): Observable<EntityResponseType> {
-    return this.http.patch<IDomain>(`${this.resourceUrl}/${getDomainIdentifier(domain) as number}`, domain, { observe: 'response' });
+    return this.http.patch<IDomain>(`${this.resourceSecureUrl}/${getDomainIdentifier(domain) as number}`, domain, { observe: 'response' });
   }
 
   find(id: number): Observable<EntityResponseType> {
@@ -38,7 +38,7 @@ export class DomainService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceSecureUrl}/${id}`, { observe: 'response' });
   }
 
   addDomainToCollectionIfMissing(domainCollection: IDomain[], ...domainsToCheck: (IDomain | null | undefined)[]): IDomain[] {

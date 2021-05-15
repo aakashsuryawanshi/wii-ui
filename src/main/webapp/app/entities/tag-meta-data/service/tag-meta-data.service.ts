@@ -12,22 +12,23 @@ export type EntityArrayResponseType = HttpResponse<ITagMetaData[]>;
 
 @Injectable({ providedIn: 'root' })
 export class TagMetaDataService {
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/tag-meta-data');
   public resourceUrl = this.applicationConfigService.getEndpointFor('api/tag-meta-data');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   create(tagMetaData: ITagMetaData): Observable<EntityResponseType> {
-    return this.http.post<ITagMetaData>(this.resourceUrl, tagMetaData, { observe: 'response' });
+    return this.http.post<ITagMetaData>(this.resourceSecureUrl, tagMetaData, { observe: 'response' });
   }
 
   update(tagMetaData: ITagMetaData): Observable<EntityResponseType> {
-    return this.http.put<ITagMetaData>(`${this.resourceUrl}/${getTagMetaDataIdentifier(tagMetaData) as number}`, tagMetaData, {
+    return this.http.put<ITagMetaData>(`${this.resourceSecureUrl}/${getTagMetaDataIdentifier(tagMetaData) as number}`, tagMetaData, {
       observe: 'response',
     });
   }
 
   partialUpdate(tagMetaData: ITagMetaData): Observable<EntityResponseType> {
-    return this.http.patch<ITagMetaData>(`${this.resourceUrl}/${getTagMetaDataIdentifier(tagMetaData) as number}`, tagMetaData, {
+    return this.http.patch<ITagMetaData>(`${this.resourceSecureUrl}/${getTagMetaDataIdentifier(tagMetaData) as number}`, tagMetaData, {
       observe: 'response',
     });
   }
@@ -42,7 +43,7 @@ export class TagMetaDataService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceSecureUrl}/${id}`, { observe: 'response' });
   }
 
   addTagMetaDataToCollectionIfMissing(

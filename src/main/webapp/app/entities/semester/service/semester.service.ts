@@ -12,20 +12,23 @@ export type EntityArrayResponseType = HttpResponse<ISemester[]>;
 
 @Injectable({ providedIn: 'root' })
 export class SemesterService {
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/semesters');
   public resourceUrl = this.applicationConfigService.getEndpointFor('api/semesters');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   create(semester: ISemester): Observable<EntityResponseType> {
-    return this.http.post<ISemester>(this.resourceUrl, semester, { observe: 'response' });
+    return this.http.post<ISemester>(this.resourceSecureUrl, semester, { observe: 'response' });
   }
 
   update(semester: ISemester): Observable<EntityResponseType> {
-    return this.http.put<ISemester>(`${this.resourceUrl}/${getSemesterIdentifier(semester) as number}`, semester, { observe: 'response' });
+    return this.http.put<ISemester>(`${this.resourceSecureUrl}/${getSemesterIdentifier(semester) as number}`, semester, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(semester: ISemester): Observable<EntityResponseType> {
-    return this.http.patch<ISemester>(`${this.resourceUrl}/${getSemesterIdentifier(semester) as number}`, semester, {
+    return this.http.patch<ISemester>(`${this.resourceSecureUrl}/${getSemesterIdentifier(semester) as number}`, semester, {
       observe: 'response',
     });
   }
@@ -40,7 +43,7 @@ export class SemesterService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceSecureUrl}/${id}`, { observe: 'response' });
   }
 
   addSemesterToCollectionIfMissing(semesterCollection: ISemester[], ...semestersToCheck: (ISemester | null | undefined)[]): ISemester[] {

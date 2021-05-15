@@ -12,20 +12,23 @@ export type EntityArrayResponseType = HttpResponse<IQuestion[]>;
 
 @Injectable({ providedIn: 'root' })
 export class QuestionService {
+  public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/questions');
   public resourceUrl = this.applicationConfigService.getEndpointFor('api/questions');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   create(question: IQuestion): Observable<EntityResponseType> {
-    return this.http.post<IQuestion>(this.resourceUrl, question, { observe: 'response' });
+    return this.http.post<IQuestion>(this.resourceSecureUrl, question, { observe: 'response' });
   }
 
   update(question: IQuestion): Observable<EntityResponseType> {
-    return this.http.put<IQuestion>(`${this.resourceUrl}/${getQuestionIdentifier(question) as number}`, question, { observe: 'response' });
+    return this.http.put<IQuestion>(`${this.resourceSecureUrl}/${getQuestionIdentifier(question) as number}`, question, {
+      observe: 'response',
+    });
   }
 
   partialUpdate(question: IQuestion): Observable<EntityResponseType> {
-    return this.http.patch<IQuestion>(`${this.resourceUrl}/${getQuestionIdentifier(question) as number}`, question, {
+    return this.http.patch<IQuestion>(`${this.resourceSecureUrl}/${getQuestionIdentifier(question) as number}`, question, {
       observe: 'response',
     });
   }
@@ -40,7 +43,7 @@ export class QuestionService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http.delete(`${this.resourceSecureUrl}/${id}`, { observe: 'response' });
   }
 
   addQuestionToCollectionIfMissing(questionCollection: IQuestion[], ...questionsToCheck: (IQuestion | null | undefined)[]): IQuestion[] {

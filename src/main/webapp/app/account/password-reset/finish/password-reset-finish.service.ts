@@ -9,6 +9,6 @@ export class PasswordResetFinishService {
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   save(key: string, newPassword: string): Observable<{}> {
-    return this.http.post(this.applicationConfigService.getEndpointFor('api/account/reset-password/finish'), { key, newPassword });
+    return this.http.post(this.applicationConfigService.getEndpointFor('api/secure/account/reset-password/finish'), { key, newPassword });
   }
 }
