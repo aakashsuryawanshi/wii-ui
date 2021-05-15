@@ -40,7 +40,7 @@
     </a>
   </div>
 </div>
-
+<br />
 <div class="row">
   <div class="container">
     <h2 class="text-center">What Is Important (WII) ?</h2>
@@ -49,8 +49,8 @@
     </h5>
   </div>
 </div>
-<br /><br />
-<br /><br />
+<br />
+
 <div class="row">
   <div class="container">
     <h2 class="text-center">Select your branch & start preparing</h2>
@@ -63,7 +63,9 @@
             <div *ngFor="let b of domain.branches" class="col-md-4">
               <div class="branch-item">
                 <fa-icon icon="star"></fa-icon>
-                <span>{{ b.name }}</span>
+                <span
+                  ><a href="{{ 'landing/' + b.id + '/view' }}">{{ b.name }}</a></span
+                >
               </div>
             </div>
           </div>
@@ -72,8 +74,8 @@
     </div>
   </div>
 </div>
-<br /><br />
-<br /><br />
+<br />
+
 <section class="service-section" id="services">
   <div class="container">
     <h1 class="text-center">Top Features</h1>
@@ -126,8 +128,7 @@
     </div>
   </div>
 </section>
-<br /><br />
-<br /><br />
+<br />
 
 <section>
   <div class="container">
@@ -136,5 +137,4 @@
     <p class="text-center">We are dedicated towards making people's life easier with the help of technology</p>
   </div>
 </section>
-<br /><br />
 <br /><br />
