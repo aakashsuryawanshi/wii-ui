@@ -1,0 +1,5 @@
+<div class="container">
+  <div class="row ans-section" *ngFor="let c of contents">
+    <markdown *ngIf="c.type! == 'PARA'" [data]="c.text!" emoji katex></markdown>
+  </div>
+</div>

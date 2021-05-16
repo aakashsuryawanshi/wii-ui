@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="col-11">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="jhi-content-heading" data-cy="ContentCreateUpdateHeading">Create or edit a Content</h2>
 
@@ -21,8 +21,16 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_text">Text</label>
-          <input type="text" class="form-control" name="text" id="field_text" data-cy="text" formControlName="text" />
+          <label class="form-control-label" for="field_text"
+            >Text (Use Markdown format, Refer:
+            <a href="https://jfcere.github.io/ngx-markdown/cheat-sheet" target="_blank">https://jfcere.github.io/ngx-markdown/cheat-sheet</a
+            >)</label
+          >
+          <textarea class="form-control" name="text" id="field_text" data-cy="text" formControlName="text" cols="100" rows="10"></textarea>
+          <!--<input type="text" class="form-control" name="text" id="field_text" data-cy="text" formControlName="text" />-->
+        </div>
+        <div style="border: 1px solid; border-radius: 5px; padding: 10px; overflow: auto; height: 200px">
+          <markdown [data]="editForm.get('text')!.value" emoji katex></markdown>
         </div>
 
         <div class="form-group">
