@@ -14,6 +14,7 @@ export type EntityArrayResponseType = HttpResponse<IQuestion[]>;
 export class QuestionService {
   public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/questions');
   public resourceUrl = this.applicationConfigService.getEndpointFor('api/questions');
+  public resourceBaseUrl = this.applicationConfigService.getEndpointFor('api');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
@@ -37,8 +38,10 @@ export class QuestionService {
     return this.http.get<IQuestion>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  findBySubject(id: number): Observable<EntityArrayResponseType> {
-    return this.http.get<IQuestion[]>(`${this.resourceUrl}/${id}/subject`, { observe: 'response' });
+  findBySubject(id: number, pageNo: number, pageSize: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IQuestion[]>(`${this.resourceBaseUrl}/subject/${id}/questions?pageNo=${pageNo}&pageSize=${pageSize}`, {
+      observe: 'response',
+    });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

@@ -14,6 +14,7 @@ export type EntityArrayResponseType = HttpResponse<ITagMetaData[]>;
 export class TagMetaDataService {
   public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/tag-meta-data');
   public resourceUrl = this.applicationConfigService.getEndpointFor('api/tag-meta-data');
+  public resourceBaseUrl = this.applicationConfigService.getEndpointFor('api/tag-meta-data');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
@@ -35,6 +36,12 @@ export class TagMetaDataService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<ITagMetaData>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findByQuestion(id: number, pageNo: number, pageSize: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ITagMetaData[]>(`${this.resourceBaseUrl}/question/${id}/tag-meta-data?pageNo=${pageNo}&pageSize=${pageSize}`, {
+      observe: 'response',
+    });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

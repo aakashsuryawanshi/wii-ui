@@ -14,6 +14,7 @@ export type EntityArrayResponseType = HttpResponse<IBranch[]>;
 export class BranchService {
   public resourceSecureUrl = this.applicationConfigService.getEndpointFor('api/secure/branches');
   public resourceUrl = this.applicationConfigService.getEndpointFor('api/branches');
+  public resourceBaseUrl = this.applicationConfigService.getEndpointFor('api');
 
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
@@ -31,6 +32,12 @@ export class BranchService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IBranch>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findByDomain(id: number, pageNo: number, pageSize: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IBranch[]>(`${this.resourceBaseUrl}/domain/${id}/branches?pageNo=${pageNo}&pageSize=${pageSize}`, {
+      observe: 'response',
+    });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
