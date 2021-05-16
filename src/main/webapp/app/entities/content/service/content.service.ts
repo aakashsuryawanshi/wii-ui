@@ -38,8 +38,8 @@ export class ContentService {
     return this.http.get<IContent>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  findByQuestion(id: number, pageNo: number, pageSize: number): Observable<EntityArrayResponseType> {
-    return this.http.get<IContent[]>(`${this.resourceBaseUrl}/question/${id}/contents?pageNo=${pageNo}&pageSize=${pageSize}`, {
+  findByQuestion(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IContent[]>(`${this.resourceBaseUrl}/question/${id}/contents`, {
       observe: 'response',
     });
   }
