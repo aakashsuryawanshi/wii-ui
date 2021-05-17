@@ -4,6 +4,7 @@ import { QuestionService } from 'app/entities/question/service/question.service'
 import { TagMetaDataService } from 'app/entities/tag-meta-data/service/tag-meta-data.service';
 import { IQuestion } from 'app/entities/question/question.model';
 import { HttpResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'jhi-question-list',
@@ -11,7 +12,7 @@ import { HttpResponse } from '@angular/common/http';
   styleUrls: ['./question-list.component.css'],
 })
 export class QuestionListComponent implements OnInit {
-  @Input()
+  //@Input()
   subjectId?: number;
 
   questions?: IQuestion[];
@@ -31,9 +32,14 @@ export class QuestionListComponent implements OnInit {
     },
   ];
 
-  constructor(private questionService: QuestionService, private tagMetaDataService: TagMetaDataService) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private questionService: QuestionService,
+    private tagMetaDataService: TagMetaDataService
+  ) {}
 
   ngOnInit(): void {
+    this.subjectId = +this.activatedRoute.snapshot.queryParamMap.get('subject')!;
     this.getQuestionsBySubject();
   }
 

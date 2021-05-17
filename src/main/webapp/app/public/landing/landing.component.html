@@ -25,9 +25,12 @@
                 <ul class="nav flex-column">
                   <ng-container *ngFor="let sub of subjects">
                     <li *ngIf="sub.semester?.id == sem.id" class="nav-item">
-                      <a class="nav-link" style="font-size: medium; font-weight: bolder; z-index: 50" (click)="setCurrentSubject(sub)">{{
-                        sub.name
-                      }}</a>
+                      <a
+                        class="nav-link"
+                        style="font-size: medium; font-weight: bolder; z-index: 50"
+                        href="/landing/{{ branchId }}/view?subject={{ sub.id }}"
+                        >{{ sub.name }}</a
+                      >
                     </li>
                   </ng-container>
                 </ul>
@@ -43,9 +46,9 @@
   <div class="row main">
     <div class="col-md-2"></div>
     <div class="col-md-7">
-      <jhi-sem-details-list-view *ngIf="currSubject == null" [branchId]="branchId" [semesters]="semesters" [subjects]="subjects">
+      <jhi-sem-details-list-view *ngIf="!subjectId" [branchId]="branchId" [semesters]="semesters" [subjects]="subjects">
       </jhi-sem-details-list-view>
-      <jhi-question-list *ngIf="currSubject != null" [subjectId]="currSubject.id!"></jhi-question-list>
+      <jhi-question-list *ngIf="subjectId"></jhi-question-list>
     </div>
     <div class="col-md-3"></div>
   </div>

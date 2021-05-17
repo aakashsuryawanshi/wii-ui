@@ -13,6 +13,7 @@ import { ISubject } from 'app/entities/subject/subject.model';
 })
 export class LandingComponent implements OnInit {
   branchId?: number;
+  subjectId?: number;
   semesters?: ISemester[];
   subjects?: ISubject[] = [];
   currSubject?: ISubject;
@@ -21,6 +22,7 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.branchId = +this.activatedRoute.snapshot.paramMap.get('id')!;
+    this.subjectId = +this.activatedRoute.snapshot.queryParamMap.get('subject')!;
     this.semesterService.findByBranchId(this.branchId, 0, 50).subscribe((resp: HttpResponse<ISemester[]>) => {
       this.semesters = resp.body ?? [];
       for (let i = 0; i < this.semesters.length; i++) {
