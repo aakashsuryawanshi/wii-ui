@@ -13,6 +13,9 @@ import { QuestionDetailsComponent } from './question-details/question-details.co
 import { MarkdownModule } from 'ngx-markdown';
 import { HttpClientModule } from '@angular/common/http';
 import { SecurityContext } from '@angular/core';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { QuestionListComponent } from './question-list/question-list.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @NgModule({
   imports: [
@@ -26,7 +29,9 @@ import { SecurityContext } from '@angular/core';
     NzTabsModule,
     BrowserModule,
     BrowserAnimationsModule,
+    NzListModule,
+    NzPaginationModule
   ],
-  declarations: [LandingComponent, SemDetailsListViewComponent, QuestionDetailsComponent],
+  declarations: [LandingComponent, SemDetailsListViewComponent, QuestionDetailsComponent, QuestionListComponent],
 })
 export class PublicModule {}
