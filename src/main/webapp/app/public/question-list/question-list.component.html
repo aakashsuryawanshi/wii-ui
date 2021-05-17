@@ -1,18 +1,18 @@
-<div class="container-fluid">
-  <div class="row">
+<div>
+  <div class="row" *ngIf="currentQuestion == null">
     <div class="col-12">
       <span style="margin: 2px">Page Size:</span>
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
+    <div class="col-12" *ngIf="currentQuestion == null">
       <nz-list class="question-list shadow-sm p-3 mb-5 bg-white rounded">
         <div>
           <nz-list-item class="zoom" *ngFor="let question of questions">
             <ng-container>
               <nz-list-item-meta>
                 <nz-list-item-meta-title>
-                  <a href="#">{{ question.title }}</a>
+                  <a (click)="setCurrentQuestion(question)">{{ question.title }}</a>
                 </nz-list-item-meta-title>
               </nz-list-item-meta>
               <ul nz-list-item-actions>
@@ -26,6 +26,15 @@
           </nz-list-item>
         </div>
       </nz-list>
+    </div>
+    <div class="col-12" *ngIf="currentQuestion != null">
+      <div class="col-12">
+        <h1>{{ currentQuestion.title }}</h1>
+        <hr />
+      </div>
+      <div class="col-12">
+        <jhi-question-details [questionId]="currentQuestion.id!"></jhi-question-details>
+      </div>
     </div>
   </div>
   <div>

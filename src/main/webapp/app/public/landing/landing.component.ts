@@ -15,6 +15,8 @@ export class LandingComponent implements OnInit {
   branchId?: number;
   semesters?: ISemester[];
   subjects?: ISubject[] = [];
+  currSubject?: ISubject;
+
   constructor(private activatedRoute: ActivatedRoute, private semesterService: SemesterService, private subjectService: SubjectService) {}
 
   ngOnInit(): void {
@@ -33,5 +35,13 @@ export class LandingComponent implements OnInit {
     let a: string = name!.replace('Semester', '');
     a = a.replace('semester', '');
     return a;
+  }
+
+  setCurrentSubject(obj: ISubject): void {
+    this.currSubject = obj;
+  }
+
+  public something(asd: string): void {
+    alert(asd);
   }
 }

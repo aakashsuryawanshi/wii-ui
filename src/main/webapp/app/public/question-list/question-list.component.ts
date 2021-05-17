@@ -12,9 +12,12 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class QuestionListComponent implements OnInit {
   @Input()
-  branchId?: number;
+  subjectId?: number;
+
   questions?: IQuestion[];
   questionCount?: number;
+  currentQuestion?: IQuestion;
+
   currentPageIndex = 1;
   pageSize = 3;
   questionTags = [
@@ -35,14 +38,20 @@ export class QuestionListComponent implements OnInit {
   }
 
   getQuestionsBySubject(): void {
-    this.questionService.findBySubject(604, this.currentPageIndex, this.pageSize).subscribe((res: HttpResponse<IQuestion[]>) => {
-      this.questions = res.body ?? [];
-      this.questionCount = 10;
-    });
+    this.questionService
+      .findBySubject(this.subjectId!, this.currentPageIndex, this.pageSize)
+      .subscribe((res: HttpResponse<IQuestion[]>) => {
+        this.questions = res.body ?? [];
+        this.questionCount = 10;
+      });
   }
 
   changePageIndex(pageIndex: number): void {
     this.currentPageIndex = pageIndex;
     this.getQuestionsBySubject();
+  }
+
+  setCurrentQuestion(obj: IQuestion): void {
+    this.currentQuestion = obj;
   }
 }

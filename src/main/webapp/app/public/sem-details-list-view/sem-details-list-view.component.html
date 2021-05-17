@@ -1,6 +1,6 @@
-<div class="container">
+<div>
   <br />
-  <div class="row">
+  <div class="row" *ngIf="currSubject == null">
     <div class="col-md-12">
       <h3 class="text-center">{{ domain?.name! }}</h3>
       <h4 class="text-center">{{ branch?.name! }}</h4>
@@ -13,7 +13,7 @@
             <ul>
               <ng-container *ngFor="let sub of subjects">
                 <li *ngIf="sub.semester?.id == sem.id" class="nav-item">
-                  <a class="nav-link" style="font-size: medium; font-weight: bolder">{{ sub.name }}</a>
+                  <a class="nav-link" style="font-size: medium; font-weight: bolder" (click)="setCurrentSubject(sub)">{{ sub.name }}</a>
                 </li>
               </ng-container>
             </ul>
@@ -22,4 +22,7 @@
       </div>
     </div>
   </div>
+</div>
+<div class="row" *ngIf="currSubject != null" style="display: block">
+  <jhi-question-list [subjectId]="currSubject.id!"></jhi-question-list>
 </div>
