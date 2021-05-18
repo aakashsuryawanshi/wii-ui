@@ -38,8 +38,8 @@ export class SemesterService {
     return this.http.get<ISemester>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  findByBranchId(id: number, pageNo: number, pageSize: number): Observable<EntityArrayResponseType> {
-    return this.http.get<ISemester[]>(`${this.resourceBaseUrl}/branch/${id}/semesters?pageNo=${pageNo}&pageSize=${pageSize}`, {
+  findByBranchId(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ISemester[]>(`${this.resourceBaseUrl}/branch/${id}/semesters`, {
       observe: 'response',
     });
   }

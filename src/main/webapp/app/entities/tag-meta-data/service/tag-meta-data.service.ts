@@ -38,8 +38,8 @@ export class TagMetaDataService {
     return this.http.get<ITagMetaData>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  findByQuestion(id: number, pageNo: number, pageSize: number): Observable<EntityArrayResponseType> {
-    return this.http.get<ITagMetaData[]>(`${this.resourceBaseUrl}/question/${id}/tag-meta-data?pageNo=${pageNo}&pageSize=${pageSize}`, {
+  findByQuestion(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ITagMetaData[]>(`${this.resourceBaseUrl}/question/${id}/tag-meta-data`, {
       observe: 'response',
     });
   }
