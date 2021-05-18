@@ -12,7 +12,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <a class="navbar-brand" href="#">Semesters</a>
+    <a class="navbar-brand">Semesters</a>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown" *ngFor="let sem of semesters">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -25,7 +25,12 @@
                 <ul class="nav flex-column">
                   <ng-container *ngFor="let sub of subjects">
                     <li *ngIf="sub.semester?.id == sem.id" class="nav-item">
-                      <a class="nav-link" style="font-size: medium; font-weight: bolder">{{ sub.name }}</a>
+                      <a
+                        class="nav-link"
+                        style="font-size: medium; font-weight: bolder; z-index: 50"
+                        href="/landing/{{ branchId }}/view?subject={{ sub.id }}"
+                        >{{ sub.name }}</a
+                      >
                     </li>
                   </ng-container>
                 </ul>
@@ -41,9 +46,9 @@
   <div class="row main">
     <div class="col-md-2"></div>
     <div class="col-md-7">
-      <jhi-sem-details-list-view *ngIf="false" [branchId]="branchId" [semesters]="semesters" [subjects]="subjects">
+      <jhi-sem-details-list-view *ngIf="!subjectId" [branchId]="branchId" [semesters]="semesters" [subjects]="subjects">
       </jhi-sem-details-list-view>
-      <jhi-question-details [questionId]="602"></jhi-question-details>
+      <jhi-question-list *ngIf="subjectId"></jhi-question-list>
     </div>
     <div class="col-md-3"></div>
   </div>

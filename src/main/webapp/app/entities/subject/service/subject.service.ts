@@ -38,8 +38,8 @@ export class SubjectService {
     return this.http.get<ISubject>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  findBySemester(id: number, pageNo: number, pageSize: number): Observable<EntityArrayResponseType> {
-    return this.http.get<ISubject[]>(`${this.resourceBaseUrl}/semester/${id}/subjects?pageNo=${pageNo}&pageSize=${pageSize}`, {
+  findBySemester(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<ISubject[]>(`${this.resourceBaseUrl}/semester/${id}/subjects`, {
       observe: 'response',
     });
   }

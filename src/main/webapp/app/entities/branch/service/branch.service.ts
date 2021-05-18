@@ -34,8 +34,8 @@ export class BranchService {
     return this.http.get<IBranch>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  findByDomain(id: number, pageNo: number, pageSize: number): Observable<EntityArrayResponseType> {
-    return this.http.get<IBranch[]>(`${this.resourceBaseUrl}/domain/${id}/branches?pageNo=${pageNo}&pageSize=${pageSize}`, {
+  findByDomain(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IBranch[]>(`${this.resourceBaseUrl}/domain/${id}/branches`, {
       observe: 'response',
     });
   }

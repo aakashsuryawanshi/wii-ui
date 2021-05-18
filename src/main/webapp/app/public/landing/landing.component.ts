@@ -13,16 +13,20 @@ import { ISubject } from 'app/entities/subject/subject.model';
 })
 export class LandingComponent implements OnInit {
   branchId?: number;
+  subjectId?: number;
   semesters?: ISemester[];
   subjects?: ISubject[] = [];
+  currSubject?: ISubject;
+
   constructor(private activatedRoute: ActivatedRoute, private semesterService: SemesterService, private subjectService: SubjectService) {}
 
   ngOnInit(): void {
     this.branchId = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.semesterService.findByBranchId(this.branchId, 0, 50).subscribe((resp: HttpResponse<ISemester[]>) => {
+    this.subjectId = +this.activatedRoute.snapshot.queryParamMap.get('subject')!;
+    this.semesterService.findByBranchId(this.branchId).subscribe((resp: HttpResponse<ISemester[]>) => {
       this.semesters = resp.body ?? [];
       for (let i = 0; i < this.semesters.length; i++) {
-        this.subjectService.findBySemester(this.semesters[i].id!, 0, 50).subscribe((res: HttpResponse<ISubject[]>) => {
+        this.subjectService.findBySemester(this.semesters[i].id!).subscribe((res: HttpResponse<ISubject[]>) => {
           this.subjects = this.subjects?.concat(res.body ?? []);
         });
       }
@@ -33,5 +37,13 @@ export class LandingComponent implements OnInit {
     let a: string = name!.replace('Semester', '');
     a = a.replace('semester', '');
     return a;
+  }
+
+  setCurrentSubject(obj: ISubject): void {
+    this.currSubject = obj;
+  }
+
+  public something(asd: string): void {
+    alert(asd);
   }
 }

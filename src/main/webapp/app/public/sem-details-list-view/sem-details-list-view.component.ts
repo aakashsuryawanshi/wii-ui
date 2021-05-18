@@ -23,6 +23,8 @@ export class SemDetailsListViewComponent implements OnInit {
   @Input()
   subjects?: ISubject[];
 
+  currSubject?: ISubject;
+
   branch?: IBranch;
   domain?: IDomain;
 
@@ -47,5 +49,9 @@ export class SemDetailsListViewComponent implements OnInit {
       }      
     });
     */
+  }
+
+  setCurrentSubject(obj: ISubject): void {
+    this.currSubject = obj;
   }
 }
