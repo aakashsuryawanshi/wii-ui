@@ -51,7 +51,7 @@
 </div>
 <br />
 
-<div class="row">
+<div class="row" id="courses">
   <div class="container">
     <h2 class="text-center">Select your branch & start preparing</h2>
   </div>
@@ -76,7 +76,7 @@
 </div>
 <br />
 
-<section class="service-section" id="services">
+<section class="service-section" id="features">
   <div class="container">
     <h1 class="text-center">Top Features</h1>
 
@@ -86,7 +86,7 @@
           <div class="icon">
             <fa-icon icon="stop-circle"></fa-icon>
           </div>
-          <h4 class="text-center"><a href="#">One-Stop Solutions</a></h4>
+          <h4 class="text-center"><a>One-Stop Solutions</a></h4>
           <p class="text-center">
             Rather than coding from scratch, Bootstrap enables you to utilize ready made blocks of code to help you get started.
           </p>
@@ -98,7 +98,7 @@
           <div class="icon">
             <fa-icon icon="signal"></fa-icon>
           </div>
-          <h4 class="text-center"><a href="#">Frequently Ask Questions</a></h4>
+          <h4 class="text-center"><a>Frequently Ask Questions</a></h4>
           <p class="text-center">
             Creating mobile ready websites is a breeze with Bootstrap thanks to the fluid grid layout that dynamically adjusts to the proper
             screen resolution.
@@ -111,7 +111,7 @@
           <div class="icon">
             <fa-icon icon="redo-alt"></fa-icon>
           </div>
-          <h4 class="text-center"><a href="#">Recently Asked Question</a></h4>
+          <h4 class="text-center"><a>Recently Asked Question</a></h4>
           <p class="text-center">Bootstrap ensures consistency regardless of who’s working on the project.</p>
         </div>
       </div>
@@ -121,7 +121,7 @@
           <div class="icon">
             <fa-icon icon="globe-americas"></fa-icon>
           </div>
-          <h4 class="text-center"><a href="#">All Subjects Covered</a></h4>
+          <h4 class="text-center"><a>All Subjects Covered</a></h4>
           <p class="text-center">Bootstrap can be tailor made according to the specifications of your project.</p>
         </div>
       </div>
@@ -130,11 +130,44 @@
 </section>
 <br />
 
-<section>
+<section id="about-us">
   <div class="container">
     <h1 class="text-center">About Us</h1>
     <h3 class="text-center">APT Solutions</h3>
     <p class="text-center">We are dedicated towards making people's life easier with the help of technology</p>
   </div>
 </section>
-<br /><br />
+<div class="footer-dark">
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <form action="/action_page.php">
+            <div class="form-group">
+              <label for="email">Email address:</label>
+              <input type="email" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="pwd">Message: </label>
+              <textarea class="form-control" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="col-md-6 item text">
+          <h2 style="color: white">APT Solution</h2>
+          <p>
+            Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis
+            tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.
+          </p>
+          <br /><br /><br /><br />
+          <div class="col item social">
+            <a href="#"><fa-icon [icon]="['fab', 'facebook']"></fa-icon></a>
+            <a href="#"><fa-icon [icon]="['fab', 'instagram']"></fa-icon></a>
+            <a href="#"><fa-icon [icon]="['fab', 'twitter']"></fa-icon></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

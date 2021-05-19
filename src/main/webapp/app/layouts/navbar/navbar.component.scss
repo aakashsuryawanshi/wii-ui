@@ -54,3 +54,13 @@ Logo styles
   background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
   background-size: contain;
 }
+
+.no-auth-menu {
+  font-size: larger;
+  padding-left: 40px;
+  color: white;
+}
+
+.no-auth-menu :hover {
+  font-weight: bolder;
+}
