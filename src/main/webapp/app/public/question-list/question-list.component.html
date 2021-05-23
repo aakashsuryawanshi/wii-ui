@@ -1,9 +1,4 @@
 <div>
-  <div class="row" *ngIf="currentQuestion == null">
-    <div class="col-12">
-      <span style="margin: 2px">Page Size:</span>
-    </div>
-  </div>
   <div class="row">
     <div class="col-12" *ngIf="currentQuestion == null">
       <nz-list class="question-list shadow-sm p-3 mb-5 bg-white rounded">
@@ -16,11 +11,17 @@
                 </nz-list-item-meta-title>
               </nz-list-item-meta>
               <ul nz-list-item-actions>
-                <nz-list-item-action
-                  ><span *ngFor="let questionTag of questionTags" class="badge badge-pill badge-primary">{{
-                    questionTag.value
-                  }}</span></nz-list-item-action
-                >
+                <nz-list-item-action>
+                  <div *ngFor="let questionTag of question.tags">
+                    <div *ngIf="questionTag.key == 'year'">
+                      {{ incrementYearCount() }}
+                    </div>
+                  </div>
+                  <span class="badge badge-pill badge-primary">
+                    {{ yearCount }}
+                  </span>
+                  <span>{{ resetYearCount() }}</span>
+                </nz-list-item-action>
               </ul>
             </ng-container>
           </nz-list-item>
@@ -44,7 +45,10 @@
       [nzTotal]="questionCount"
       [nzPageSize]="pageSize"
       [nzSize]="'small'"
+      [nzPageSizeOptions]="[5, 10, 15, 20, 25]"
+      [nzShowSizeChanger]="true"
       (nzPageIndexChange)="changePageIndex($event)"
+      (nzPageSizeChange)="changePageSize($event)"
     ></nz-pagination>
   </div>
   <br />

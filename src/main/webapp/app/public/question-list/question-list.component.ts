@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { QuestionService } from 'app/entities/question/service/question.service';
-import { TagMetaDataService } from 'app/entities/tag-meta-data/service/tag-meta-data.service';
 import { IQuestion } from 'app/entities/question/question.model';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -20,23 +19,16 @@ export class QuestionListComponent implements OnInit {
   currentQuestion?: IQuestion;
 
   currentPageIndex = 1;
-  pageSize = 3;
+  pageSize = 5;
+  yearCount = 0;
   questionTags = [
     {
       key: 'year',
       value: '2020',
     },
-    {
-      key: 'year',
-      value: '2021',
-    },
   ];
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private questionService: QuestionService,
-    private tagMetaDataService: TagMetaDataService
-  ) {}
+  constructor(private activatedRoute: ActivatedRoute, private questionService: QuestionService) {}
 
   ngOnInit(): void {
     this.subjectId = +this.activatedRoute.snapshot.queryParamMap.get('subject')!;
@@ -45,10 +37,10 @@ export class QuestionListComponent implements OnInit {
 
   getQuestionsBySubject(): void {
     this.questionService
-      .findBySubject(this.subjectId!, this.currentPageIndex, this.pageSize)
+      .findBySubject(this.subjectId!, this.currentPageIndex - 1, this.pageSize)
       .subscribe((res: HttpResponse<IQuestion[]>) => {
         this.questions = res.body ?? [];
-        this.questionCount = 10;
+        this.questionCount = Number(res.headers.get('x-total-elements'));
       });
   }
 
@@ -56,8 +48,20 @@ export class QuestionListComponent implements OnInit {
     this.currentPageIndex = pageIndex;
     this.getQuestionsBySubject();
   }
+  changePageSize(pagesize: number): void {
+    this.pageSize = pagesize;
+    this.getQuestionsBySubject();
+  }
 
   setCurrentQuestion(obj: IQuestion): void {
     this.currentQuestion = obj;
+  }
+
+  incrementYearCount(): void {
+    this.yearCount++;
+  }
+
+  resetYearCount(): void {
+    this.yearCount = 0;
   }
 }
