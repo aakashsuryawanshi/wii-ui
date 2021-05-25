@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="fileMetaData">
+      <h2 data-cy="fileMetaDataDetailsHeading"><span>File Meta Data</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ fileMetaData.id }}</span>
+        </dd>
+        <dt><span>Key</span></dt>
+        <dd>
+          <span>{{ fileMetaData.key }}</span>
+        </dd>
+        <dt><span>Value</span></dt>
+        <dd>
+          <span>{{ fileMetaData.value }}</span>
+        </dd>
+        <dt><span>File Details</span></dt>
+        <dd>
+          <div *ngIf="fileMetaData.fileDetails">
+            <a [routerLink]="['/file-details', fileMetaData.fileDetails?.id, 'view']">{{ fileMetaData.fileDetails?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/file-meta-data', fileMetaData.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
