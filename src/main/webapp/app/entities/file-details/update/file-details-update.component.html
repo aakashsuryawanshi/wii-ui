@@ -1,0 +1,92 @@
+<div class="row container">
+  <div class="col-6">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-file-details-heading" data-cy="FileDetailsCreateUpdateHeading">Create or edit a File Details</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_sourceName">Source Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="sourceName"
+            id="field_sourceName"
+            data-cy="sourceName"
+            formControlName="sourceName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_destinationName">Destination Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="destinationName"
+            id="field_destinationName"
+            data-cy="destinationName"
+            formControlName="destinationName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_destination">Destination</label>
+          <input
+            type="text"
+            class="form-control"
+            name="destination"
+            id="field_destination"
+            data-cy="destination"
+            formControlName="destination"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_metaData">Meta Data</label>
+          <input type="text" class="form-control" name="metaData" id="field_metaData" data-cy="metaData" formControlName="metaData" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-6">
+    <div class="container" style="padding: 20px">
+      <!--
+            <nz-upload nzType="drag" [nzMultiple]="false" [nzShowButton]="true" nzAction="/api/secure/file-upload">
+                <p class="ant-upload-drag-icon">
+                    <i nz-icon nzType="inbox"></i>
+                </p>
+                <p class="ant-upload-text">Click or drag file to this area to upload</p>
+                <p class="ant-upload-hint">
+                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+                </p>
+            </nz-upload>
+            -->
+      <p>Upload a file to make automatic entries of file details and file meta data automatically</p>
+      <input type="file" [(ngModel)]="uploadFile" (change)="handleFileInput($event)" />
+
+      <button style="margin-top: 16px" (click)="handleUpload()">Start Upload</button>
+    </div>
+  </div>
+</div>

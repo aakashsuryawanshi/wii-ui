@@ -39,6 +39,16 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'Contents' },
         loadChildren: () => import('./content/content.module').then(m => m.ContentModule),
       },
+      {
+        path: 'file-details',
+        data: { pageTitle: 'Files' },
+        loadChildren: () => import('./file-details/file-details.module').then(m => m.FileDetailsModule),
+      },
+      {
+        path: 'file-meta-data',
+        data: { pageTitle: 'File Metadata' },
+        loadChildren: () => import('./file-meta-data/file-meta-data.module').then(m => m.FileMetaDataModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
