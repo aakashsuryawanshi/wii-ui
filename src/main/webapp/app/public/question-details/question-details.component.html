@@ -1,5 +1,8 @@
 <div class="container">
   <div class="row ans-section" *ngFor="let c of contents">
     <markdown *ngIf="c.type! == 'PARA'" [data]="c.text!" emoji katex></markdown>
+    <div *ngIf="c.type! == 'IMAGE'">
+      <img [src]="getImageUrl(c.filePath!)" height="300px" width="200px" />
+    </div>
   </div>
 </div>

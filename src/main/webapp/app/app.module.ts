@@ -26,6 +26,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { PublicModule } from './public/public.module';
+import { PrivateModule } from './private/private.module';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { PublicModule } from './public/public.module';
     SharedModule,
     HomeModule,
     PublicModule,
+    PrivateModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     EntityRoutingModule,
     AppRoutingModule,
