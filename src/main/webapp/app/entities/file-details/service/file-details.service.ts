@@ -26,6 +26,13 @@ export class FileDetailsService {
     return this.http.post<IFileDetails>(this.resourceBaseUrl + '/secure/file-upload', fileData, { observe: 'response' });
   }
 
+  getdownloadBaseUrl(): string {
+    return this.resourceBaseUrl + '/file-download/';
+  }
+  download(id: number): Observable<ArrayBuffer> {
+    return this.http.get(this.resourceBaseUrl + '/file-download/' + id.toString(), { responseType: 'arraybuffer' });
+  }
+
   update(fileDetails: IFileDetails): Observable<EntityResponseType> {
     return this.http.put<IFileDetails>(`${this.resourceSecureUrl}/${getFileDetailsIdentifier(fileDetails) as number}`, fileDetails, {
       observe: 'response',

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-6">
+    <div>
+      <input type="file" (change)="fileChangeEvent($event)" />
+      <div class="margin-top: 20px; padding: 20px">
+        <button class="btn btn-warning" (click)="markAs('ques')">Question</button>
+        <button class="btn btn-warning" (click)="markAs('tag')">Year Tag</button>
+        <button class="btn btn-warning" (click)="markAs('ans-para')">Para Answer</button>
+        <button class="btn btn-warning" (click)="markAs('ans-img')">Img Answer</button>
+        <button class="btn btn-warning" (click)="sendForExtraction()">Send for extraction</button>
+        <button class="btn btn-warning" (click)="enablePreview()">{{ previewEnabled ? 'Disable' : 'Enable' }} Preview</button>
+      </div>
+    </div>
+    <div>
+      <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="false"
+        [aspectRatio]="4 / 3"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()"
+      ></image-cropper>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="row" *ngIf="previewEnabled" style="margin: 20px">
+      <img [src]="croppedImage" />
+    </div>
+    <div class="row" *ngIf="!previewEnabled"></div>
+  </div>
+</div>
