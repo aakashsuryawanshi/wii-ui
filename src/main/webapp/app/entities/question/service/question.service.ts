@@ -44,6 +44,26 @@ export class QuestionService {
     });
   }
 
+  findBySubjectWithFilters(
+    filters: Map<string, Array<string>>,
+    searchValue: string,
+    id: number,
+    pageNo: number,
+    pageSize: number
+  ): Observable<any> {
+    const tagObject: any = {};
+    Array.from(filters.entries()).map(val => {
+      tagObject[val[0]] = val[1];
+    });
+    return this.http.post<Map<string, Array<string>>>(
+      `${this.resourceBaseUrl}/subject/${id}/questions?pageNo=${pageNo}&pageSize=${pageSize}&title=${searchValue}`,
+      tagObject,
+      {
+        observe: 'response',
+      }
+    );
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IQuestion[]>(this.resourceUrl, { params: options, observe: 'response' });

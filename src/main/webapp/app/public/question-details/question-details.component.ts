@@ -34,7 +34,6 @@ export class QuestionDetailsComponent implements OnInit {
   questionId?: number;
   fileMap: Map<number, ArrayBuffer> = new Map();
   public contents?: IContent[];
-  private question?: Question;
 
   constructor(private sanitizer: DomSanitizer, private contentService: ContentService, private fileService: FileDetailsService) {}
 

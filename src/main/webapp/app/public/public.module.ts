@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Input, NgModule, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from 'app/shared/shared.module';
@@ -16,6 +16,9 @@ import { SecurityContext } from '@angular/core';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { QuestionListComponent } from './question-list/question-list.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { QuestionListFilterComponent } from './question-list-filter/question-list-filter.component';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 @NgModule({
   imports: [
@@ -30,8 +33,16 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     BrowserModule,
     BrowserAnimationsModule,
     NzListModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzCollapseModule,
+    NzCheckboxModule,
   ],
-  declarations: [LandingComponent, SemDetailsListViewComponent, QuestionDetailsComponent, QuestionListComponent],
+  declarations: [
+    LandingComponent,
+    SemDetailsListViewComponent,
+    QuestionDetailsComponent,
+    QuestionListComponent,
+    QuestionListFilterComponent,
+  ],
 })
 export class PublicModule {}
