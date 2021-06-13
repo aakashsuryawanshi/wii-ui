@@ -44,7 +44,9 @@
 </nav>
 <div>
   <div class="row main">
-    <div class="col-md-2"></div>
+    <div class="col-md-2">
+      <jhi-question-list-filter *ngIf="subjectId"></jhi-question-list-filter>
+    </div>
     <div class="col-md-7">
       <jhi-sem-details-list-view *ngIf="!subjectId" [branchId]="branchId" [semesters]="semesters" [subjects]="subjects">
       </jhi-sem-details-list-view>

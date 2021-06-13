@@ -44,6 +44,12 @@ export class TagMetaDataService {
     });
   }
 
+  findAllUniqueTags(): Observable<HttpResponse<Map<string, Array<string>>>> {
+    return this.http.get<Map<string, Array<string>>>(`${this.resourceBaseUrl}/allUnique`, {
+      observe: 'response',
+    });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<ITagMetaData[]>(this.resourceUrl, { params: options, observe: 'response' });

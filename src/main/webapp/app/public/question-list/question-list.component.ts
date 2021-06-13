@@ -11,22 +11,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./question-list.component.css'],
 })
 export class QuestionListComponent implements OnInit {
-  //@Input()
   subjectId?: number;
-
   questions?: IQuestion[];
   questionCount?: number;
   currentQuestion?: IQuestion;
+  searchValue = '';
 
   currentPageIndex = 1;
   pageSize = 5;
   yearCount = 0;
-  questionTags = [
-    {
-      key: 'year',
-      value: '2020',
-    },
-  ];
+  filters = new Map();
 
   constructor(private activatedRoute: ActivatedRoute, private questionService: QuestionService) {}
 
@@ -37,11 +31,19 @@ export class QuestionListComponent implements OnInit {
 
   getQuestionsBySubject(): void {
     this.questionService
-      .findBySubject(this.subjectId!, this.currentPageIndex - 1, this.pageSize)
+      .findBySubjectWithFilters(this.filters, this.searchValue, this.subjectId!, this.currentPageIndex - 1, this.pageSize)
       .subscribe((res: HttpResponse<IQuestion[]>) => {
         this.questions = res.body ?? [];
         this.questionCount = Number(res.headers.get('x-total-elements'));
+        console.warn(this.questions);
       });
+  }
+
+  getQuestionsBySubjectWithFilters(subjectId: number, filters: Map<any, any>): void {
+    this.filters = filters;
+    console.warn(JSON.stringify(this.filters));
+    this.subjectId = subjectId;
+    this.getQuestionsBySubject();
   }
 
   changePageIndex(pageIndex: number): void {
@@ -63,5 +65,10 @@ export class QuestionListComponent implements OnInit {
 
   resetYearCount(): void {
     this.yearCount = 0;
+  }
+
+  searchCriteria(): void {
+    console.warn(this.searchValue);
+    this.getQuestionsBySubject();
   }
 }
